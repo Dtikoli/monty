@@ -4,20 +4,13 @@ info_t info = INFO_INIT;
 
 /**
  * parse_monty - a parser for the monty bytecode intepreter
- * @av: pointer to CL argument containing the opecode file
  */
-void parse_monty(char *av)
+void parse_monty(void)
 {
 	int nline = 0, nbytes = 1024;
 	char *_gets = NULL;
 	void (*opcode_func)(stack_t **, unsigned int);
 
-	info.fp = fopen(av, "r");
-	if (!info.fp)
-	{
-		fprintf(stderr, ERROR_FILE, av);
-		exit(EXIT_FAILURE);
-	}
 	while (1)
 	{
 		nline++;
@@ -62,7 +55,14 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	parse_monty(argv[1]);
+	info.fp = fopen(argv[1], "r");
+	if (!info.fp)
+	{
+		fprintf(stderr, ERROR_FILE, argv[1]);
+		exit(EXIT_FAILURE);
+	}
+
+	parse_monty();
 	free_handle(1);
 
 	return (EXIT_SUCCESS);

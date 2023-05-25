@@ -79,7 +79,7 @@ extern info_t info;
 #define INFO_INIT {NULL, NULL, NULL, NULL, 0}
 
 /* Monty parser */
-void parse_monty(char *);
+void parse_monty(void);
 
 /* get function */
 void (*get_func(char **))(stack_t **, unsigned int);
