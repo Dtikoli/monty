@@ -7,23 +7,23 @@
  */
 void _pchar(stack_t **stack, unsigned int nline)
 {
-	stack_t *node = *stack;
+	stack_t *current = *stack;
 
-	if (!node)
+	if (!current)
 	{
 		fprintf(stderr, FAILURE_PCHAR, nline);
 		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
-	if (node->n < 0 || node->n > 127)
+	if (current->n < 0 || current->n > 127)
 	{
 		fprintf(stderr, ERROR_PCHAR, nline);
 		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
-	putchar(node->n);
+	putchar(current->n);
 	putchar('\n');
 }
 
@@ -34,20 +34,20 @@ void _pchar(stack_t **stack, unsigned int nline)
  */
 void _pstr(stack_t **stack, unsigned int nline)
 {
-	stack_t *node = *stack;
+	stack_t *cnode = *stack;
 
 	(void)nline;
 
-	if (!node)
+	if (!cnode)
 	{
 		putchar('\n');
 		return;
 	}
 
-	while (node && node->n != 0 && node->n >= 0 && node->n <= 127)
+	while (cnode && cnode->n != 0 && cnode->n >= 0 && cnode->n <= 127)
 	{
-		putchar(node->n);
-		node = node->next;
+		putchar(cnode->n);
+		cnode = cnode->next;
 	}
 
 	putchar('\n');

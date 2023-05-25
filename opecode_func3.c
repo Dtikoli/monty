@@ -18,17 +18,17 @@ void _nop(stack_t **stack, unsigned int nline)
  */
 void _rotl(stack_t **stack, unsigned int nline)
 {
-	stack_t *temp = *stack;
-	int num  = 0;
+	stack_t *current = *stack;
+	int n  = 0;
 
 	(void)nline;
 
 	if (*stack == NULL)
 		return;
-	temp = get_dnodeint_at_index(*stack, 0);
-	num = temp->n;
+	current = get_dnodeint_at_index(*stack, 0);
+	n = current->n;
 	delete_dnodeint_at_index(stack, 0);
-	add_dnodeint_end(stack, num);
+	add_dnodeint_end(stack, n);
 }
 
 /**
@@ -38,17 +38,18 @@ void _rotl(stack_t **stack, unsigned int nline)
  */
 void _rotr(stack_t **stack, unsigned int nline)
 {
-	stack_t *temp = *stack;
-	int num = 0, len = dlistint_len(*stack);
+	stack_t *current = *stack;
+	int n = 0;
+	int len = dlistint_len(*stack);
 
 	(void)nline;
 
 	if (*stack == NULL)
 		return;
-	temp = get_dnodeint_at_index(*stack, len - 1);
-	num = temp->n;
+	current = get_dnodeint_at_index(*stack, len - 1);
+	n = current->n;
 	delete_dnodeint_at_index(stack, len - 1);
-	add_dnodeint(stack, num);
+	add_dnodeint(stack, n);
 }
 
 /**

@@ -7,8 +7,8 @@
  */
 void _push(stack_t **stack, unsigned int nline)
 {
-	stack_t *new;
-	int num = 0, i;
+	stack_t *node;
+	int n = 0, i;
 
 	if (info.words[1] == NULL)
 	{
@@ -26,13 +26,13 @@ void _push(stack_t **stack, unsigned int nline)
 			exit(EXIT_FAILURE);
 		}
 	}
-	num = atoi(info.words[1]);
+	n = atoi(info.words[1]);
 
 	if (info.sflag == 0)
-		new = add_dnodeint(stack, num);
+		node = add_dnodeint(stack, n);
 	else if (info.sflag == 1)
-		new = add_dnodeint_end(stack, num);
-	if (!new)
+		node = add_dnodeint_end(stack, n);
+	if (!node)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
 		free_handle(1);
@@ -59,16 +59,16 @@ void _pall(stack_t **stack, unsigned int nline)
  */
 void _pint(stack_t **stack, unsigned int nline)
 {
-	stack_t *head = *stack;
+	stack_t *current = *stack;
 
-	if (!head)
+	if (!current)
 	{
 		fprintf(stderr, FAILURE_PINT, nline);
 		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
-	printf("%d\n", head->n);
+	printf("%d\n", current->n);
 }
 
 /**
@@ -78,9 +78,9 @@ void _pint(stack_t **stack, unsigned int nline)
  */
 void _pop(stack_t **stack, unsigned int nline)
 {
-	stack_t *temp = *stack;
+	stack_t *current = *stack;
 
-	if (!temp)
+	if (!current)
 	{
 		fprintf(stderr, FAILURE_POP, nline);
 		free_handle(1);
@@ -98,9 +98,9 @@ void _pop(stack_t **stack, unsigned int nline)
 void _add(stack_t **stack, unsigned int nline)
 {
 	int sum = 0;
-	stack_t *node = NULL;
-	stack_t *node_0 = get_dnodeint_at_index(*stack, 0);
-	stack_t *node_1 = get_dnodeint_at_index(*stack, 1);
+	stack_t *nsum = NULL;
+	stack_t *node0 = get_dnodeint_at_index(*stack, 0);
+	stack_t *node1 = get_dnodeint_at_index(*stack, 1);
 
 	if (dlistint_len(*stack) < 2)
 	{
@@ -109,11 +109,11 @@ void _add(stack_t **stack, unsigned int nline)
 		exit(EXIT_FAILURE);
 	}
 
-	sum = node_0->n + node_1->n;
+	sum = node0->n + node1->n;
 	delete_dnodeint_at_index(stack, 0);
 	delete_dnodeint_at_index(stack, 0);
-	node = add_dnodeint(stack, sum);
-	if (!node)
+	nsum = add_dnodeint(stack, sum);
+	if (!nsum)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
 		free_handle(1);

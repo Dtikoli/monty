@@ -8,9 +8,9 @@
 void _sub(stack_t **stack, unsigned int nline)
 {
 	int sub = 0;
-	stack_t *node = NULL;
-	stack_t *node_0 = get_dnodeint_at_index(*stack, 0);
-	stack_t *node_1 = get_dnodeint_at_index(*stack, 1);
+	stack_t *nsub = NULL;
+	stack_t *node0 = get_dnodeint_at_index(*stack, 0);
+	stack_t *node1 = get_dnodeint_at_index(*stack, 1);
 
 	if (dlistint_len(*stack) < 2)
 	{
@@ -19,11 +19,11 @@ void _sub(stack_t **stack, unsigned int nline)
 		exit(EXIT_FAILURE);
 	}
 
-	sub = node_1->n - node_0->n;
+	sub = node1->n - node0->n;
 	delete_dnodeint_at_index(stack, 0);
 	delete_dnodeint_at_index(stack, 0);
-	node = add_dnodeint(stack, sub);
-	if (!node)
+	nsub = add_dnodeint(stack, sub);
+	if (!nsub)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
 		free_handle(1);
@@ -39,9 +39,9 @@ void _sub(stack_t **stack, unsigned int nline)
 void _div(stack_t **stack, unsigned int nline)
 {
 	int div = 0;
-	stack_t *node = NULL;
-	stack_t *node_0 = get_dnodeint_at_index(*stack, 0);
-	stack_t *node_1 = get_dnodeint_at_index(*stack, 1);
+	stack_t *ndiv = NULL;
+	stack_t *node0 = get_dnodeint_at_index(*stack, 0);
+	stack_t *node1 = get_dnodeint_at_index(*stack, 1);
 
 	if (dlistint_len(*stack) < 2)
 	{
@@ -50,18 +50,18 @@ void _div(stack_t **stack, unsigned int nline)
 		exit(EXIT_FAILURE);
 	}
 
-	if (node_0->n == 0)
+	if (node0->n == 0)
 	{
 		fprintf(stderr, ERROR_DIV, nline);
 		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
-	div = node_1->n / node_0->n;
+	div = node1->n / node0->n;
 	delete_dnodeint_at_index(stack, 0);
 	delete_dnodeint_at_index(stack, 0);
-	node = add_dnodeint(stack, div);
-	if (!node)
+	ndiv = add_dnodeint(stack, div);
+	if (!ndiv)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
 		free_handle(1);
@@ -77,9 +77,9 @@ void _div(stack_t **stack, unsigned int nline)
 void _mul(stack_t **stack, unsigned int nline)
 {
 	int mul = 0;
-	stack_t *node = NULL;
-	stack_t *node_0 = get_dnodeint_at_index(*stack, 0);
-	stack_t *node_1 = get_dnodeint_at_index(*stack, 1);
+	stack_t *nmul = NULL;
+	stack_t *node0 = get_dnodeint_at_index(*stack, 0);
+	stack_t *node1 = get_dnodeint_at_index(*stack, 1);
 
 	if (dlistint_len(*stack) < 2)
 	{
@@ -88,11 +88,11 @@ void _mul(stack_t **stack, unsigned int nline)
 		exit(EXIT_FAILURE);
 	}
 
-	mul = node_1->n * node_0->n;
+	mul = node1->n * node0->n;
 	delete_dnodeint_at_index(stack, 0);
 	delete_dnodeint_at_index(stack, 0);
-	node = add_dnodeint(stack, mul);
-	if (!node)
+	nmul = add_dnodeint(stack, mul);
+	if (!nmul)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
 		free_handle(1);
@@ -108,9 +108,9 @@ void _mul(stack_t **stack, unsigned int nline)
 void _mod(stack_t **stack, unsigned int nline)
 {
 	int mod = 0;
-	stack_t *node = NULL;
-	stack_t *node_0 = get_dnodeint_at_index(*stack, 0);
-	stack_t *node_1 = get_dnodeint_at_index(*stack, 1);
+	stack_t *nmode = NULL;
+	stack_t *node0 = get_dnodeint_at_index(*stack, 0);
+	stack_t *node1 = get_dnodeint_at_index(*stack, 1);
 
 	if (dlistint_len(*stack) < 2)
 	{
@@ -119,18 +119,18 @@ void _mod(stack_t **stack, unsigned int nline)
 		exit(EXIT_FAILURE);
 	}
 
-	if (node_0->n == 0)
+	if (node0->n == 0)
 	{
 		fprintf(stderr, ERROR_DIV, nline);
 		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
-	mod = node_1->n % node_0->n;
+	mod = node1->n % node0->n;
 	delete_dnodeint_at_index(stack, 0);
 	delete_dnodeint_at_index(stack, 0);
-	node = add_dnodeint(stack, mod);
-	if (!node)
+	nmode = add_dnodeint(stack, mod);
+	if (!nmode)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
 		free_handle(1);
@@ -145,8 +145,8 @@ void _mod(stack_t **stack, unsigned int nline)
  */
 void _swap(stack_t **stack, unsigned int nline)
 {
-	stack_t *temp = *stack, *node = NULL;
-	int num;
+	stack_t *current = *stack, *nswap = NULL;
+	int n;
 
 	if (dlistint_len(*stack) < 2)
 	{
@@ -155,11 +155,11 @@ void _swap(stack_t **stack, unsigned int nline)
 		exit(EXIT_FAILURE);
 	}
 
-	temp = get_dnodeint_at_index(*stack, 0);
-	num = temp->n;
+	current = get_dnodeint_at_index(*stack, 0);
+	n = current->n;
 	delete_dnodeint_at_index(stack, 0);
-	node = insert_dnodeint_at_index(stack, 1, num);
-	if (!node)
+	nswap = insert_dnodeint_at_index(stack, 1, n);
+	if (!nswap)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
 		free_handle(1);

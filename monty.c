@@ -29,7 +29,7 @@ void parse_monty(char *av)
 		}
 		_gets = fgets(info.line, nbytes, info.fp);
 		if (!_gets)
-			break;
+			return;
 		info.words = strtow(info.line);
 		if (info.words[0] == NULL || info.words[0][0] == '#')
 		{
