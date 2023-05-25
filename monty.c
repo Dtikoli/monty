@@ -3,50 +3,31 @@
 info_t info = INFO_INIT;
 
 /**
-  * errorusage_print - prints error messeages upon usage failure
-  * Return: Nothing
-  */
-void errorusage_print(void)
-{
-	fprintf(stderr, ERROR_USAGE);
-	exit(EXIT_FAILURE);
-}
-
-
-/**
-  * errormalloc_print - prints error messeages if malloc fails
-  * Return: Nothing
-  */
-void errormalloc_print(void)
-{
-	fprintf(stderr, FAILURE_MALLOC);
-	exit(EXIT_FAILURE);
-}
-
-/**
  * parse_monty - a parser for the monty bytecode intepreter
- * @clargs: pointer to struct of arguments from main
+ * @av: pointer to CL argument containing the opecode file
  */
-void parse_monty(cmd_t *clargs)
+void parse_monty(char *av)
 {
+	int nline = 0, nbytes = 1024;
 	char *_gets = NULL;
 	void (*opcode_func)(stack_t **, unsigned int);
 
-	if (clargs->ac != 2)
-		errorusage_print();
-	info.fp = fopen(clargs->av, "r");
+	info.fp = fopen(av, "r");
 	if (!info.fp)
 	{
-		fprintf(stderr, ERROR_FILE, clargs->av);
+		fprintf(stderr, ERROR_FILE, av);
 		exit(EXIT_FAILURE);
 	}
 	while (1)
 	{
-		clargs->nline++;
-		info.line = malloc(1024);
+		nline++;
+		info.line = malloc(nbytes);
 		if (!info.line)
-			errormalloc_print();
-		_gets = fgets(info.line, 1024, info.fp);
+		{
+			fprintf(stderr, FAILURE_MALLOC);
+			exit(EXIT_FAILURE);
+		}
+		_gets = fgets(info.line, nbytes, info.fp);
 		if (!_gets)
 			break;
 		info.words = strtow(info.line);
@@ -58,14 +39,13 @@ void parse_monty(cmd_t *clargs)
 		opcode_func = get_func(info.words);
 		if (!opcode_func)
 		{
-			fprintf(stderr, ERROR_UNKNOWN, clargs->nline, info.words[0]);
+			fprintf(stderr, ERROR_UNKNOWN, nline, info.words[0]);
 			free_handle(1);
 			exit(EXIT_FAILURE);
 		}
-		opcode_func(&(info.stack), clargs->nline);
+		opcode_func(&(info.stack), nline);
 		free_handle(0);
 	}
-	free_handle(1);
 }
 
 /**
@@ -76,13 +56,14 @@ void parse_monty(cmd_t *clargs)
  */
 int main(int argc, char *argv[])
 {
-	cmd_t clargs;
+	if (argc != 2)
+	{
+		fprintf(stderr, ERROR_USAGE);
+		exit(EXIT_FAILURE);
+	}
 
-	clargs.av = argv[1];
-	clargs.ac = argc;
-	clargs.nline = 0;
-
-	parse_monty(&clargs);
+	parse_monty(argv[1]);
+	free_handle(1);
 
 	return (EXIT_SUCCESS);
 }

@@ -58,22 +58,6 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * struct cmd_s - structure of arguments passed from CL
- * @av: name of file passed as CL arg
- * @ac: number of arguments from CL
- * @nline: number of the current line in the file
- *
- * Description: command line arguments passed to main used
- * in different functions, organized in a struct for clarity
- */
-typedef struct cmd_s
-{
-	char *av;
-	int ac;
-	unsigned int nline;
-} cmd_t;
-
-/**
  * struct info_s - extern data to access inside functions
  * @line: line from the opcode file
  * @words: tokenized content of opcode file
@@ -95,7 +79,7 @@ extern info_t info;
 #define INFO_INIT {NULL, NULL, NULL, NULL, 0}
 
 /* Monty parser */
-void parse_monty(cmd_t *);
+void parse_monty(char *);
 
 /* get function */
 void (*get_func(char **))(stack_t **, unsigned int);
