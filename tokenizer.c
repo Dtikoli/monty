@@ -1,29 +1,29 @@
 #include "monty.h"
 
 /**
- * words_counter - count the number of words in a from a line
+ * words_counter - count the number of words in a line
  * @s: string to evaluate
- * Return: number of words
+ * Return: word count
  */
-int words_counter(char *s)
+int words_counter(char *str)
 {
-	int flag, c, w;
+	int flag, i, word;
 
 	flag = 0;
-	w = 0;
+	word = 0;
 
-	for (c = 0; s[c] != '\0'; c++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (s[c] == ' ')
+		if (str[i] == ' ')
 			flag = 0;
 		else if (flag == 0)
 		{
 			flag = 1;
-			w++;
+			word++;
 		}
 	}
 
-	return (w);
+	return (word);
 }
 /**
  * **strtow - splits a string into words
