@@ -26,6 +26,7 @@
 #define FAILURE_PCHAR "L%u: can't pchar, stack empty\n"
 #define ERROR_PCHAR "L%u: can't pchar, value out of range\n"
 
+#define INFO_INIT {NULL, NULL, NULL, NULL, 0}
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -75,8 +76,6 @@ typedef struct info_s
 } info_t;
 
 extern info_t info;
-
-#define INFO_INIT {NULL, NULL, NULL, NULL, 0}
 
 /* Monty parser */
 void parse_monty(void);
