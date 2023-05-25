@@ -2,7 +2,7 @@
 
 /**
  * words_counter - count the number of words in a line
- * @s: string to evaluate
+ * @str: string to evaluate
  * Return: word count
  */
 int words_counter(char *str)
