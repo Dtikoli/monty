@@ -18,6 +18,7 @@ void parse_monty(void)
 		if (!info.line)
 		{
 			fprintf(stderr, FAILURE_MALLOC);
+			free_handle(1);
 			exit(EXIT_FAILURE);
 		}
 		_gets = fgets(info.line, nbytes, info.fp);
